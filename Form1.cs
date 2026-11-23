@@ -133,7 +133,7 @@ namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-
+            
             txtBoxKodeBahan.Text = row.Cells[0].Value.ToString();
             txtBoxNamaBahan.Text = row.Cells[1].Value.ToString();
             cmbBoxKategori.Text = row.Cells[2].Value.ToString();
