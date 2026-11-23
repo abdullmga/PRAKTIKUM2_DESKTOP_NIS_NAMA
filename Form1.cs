@@ -17,8 +17,10 @@ namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
     {
         string connectionString = "Server=localhost;Port=3306;Database=db_kopi_gudang;Uid=root;Password=;";
         string selectedId = "";
+
         public Form1()
         {
+
             InitializeComponent();
         }
 
@@ -41,20 +43,44 @@ namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
                 {
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        
+                        int jumlah_kritis = 0;
+                        int total_item = 0;
+
                         while (reader.Read())
                         {
-                            
+                            int stok = Convert.ToInt32(reader["stok"]);
+                            int harga_satuan = Convert.ToInt32(reader["harga_satuan"]);
+                            int batas_minimum = Convert.ToInt32(reader["batas_minimum"]);
 
-                            dataGridView1.Rows.Add(
+                            int no_baris = dataGridView1.Rows.Add(
                                 reader["kode_bahan"].ToString(),
                                 reader["nama_bahan"].ToString(),
                                 reader["kategori"].ToString(),
                                 reader["stok"].ToString(),
                                 reader["satuan"].ToString(),
                                 reader["harga_satuan"].ToString(),
-                                reader["batas_minimum"].ToString());
+                                reader["batas_minimum"].ToString()
+                            );
+
+                            total_item += stok * harga_satuan;
+                            
+                            if (stok <= batas_minimum)
+                            {
+                                dataGridView1.Rows[no_baris].DefaultCellStyle.BackColor = Color.FromArgb(255, 105, 105);
+                                dataGridView1.Rows[no_baris].DefaultCellStyle.ForeColor = Color.White;
+
+                                jumlah_kritis++;
+                            }
+                            else
+                            {
+                                dataGridView1.Rows[no_baris].DefaultCellStyle.BackColor = Color.FromArgb(3, 161, 252);
+                                dataGridView1.Rows[no_baris].DefaultCellStyle.ForeColor = Color.White;
+                            }
+                            
                         }
+                        label13.Text = jumlah_kritis.ToString();
+                        label11.Text = total_item.ToString("n");
+
                     }
                 }
             }
@@ -163,6 +189,7 @@ namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
             if (selectedId == "")
             {
                 MessageBox.Show("Pilih data yang ingin diubah terlebih dahulu !");
+                return;
             }
 
             try
@@ -204,6 +231,11 @@ namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
 
         private void btnHapus_Click(object sender, EventArgs e)
         {
+            if (selectedId == "")
+            {
+                MessageBox.Show("Pilih data yang ingin dihapus terlebih dahulu !");
+                return;
+            }
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -219,7 +251,7 @@ namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
                         DialogResult pilihan = MessageBox.Show("Pilih data yang ingin dihapus terlebih dahulu !", "Hapus", MessageBoxButtons.YesNo);
 
                         if (pilihan == DialogResult.Yes)
-                        { 
+                        {
                             MessageBox.Show("Data berhasil dihapus !");
 
                             cmd.ExecuteNonQuery();
@@ -228,7 +260,8 @@ namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
 
                             BersihkanInput();
                         }
-                        else if(pilihan == DialogResult.No){
+                        else if (pilihan == DialogResult.No)
+                        {
                             return;
                         }
                     }
