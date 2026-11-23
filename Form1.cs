@@ -21,10 +21,10 @@ namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            TampilkanData();
+            TampilkanData("");
         }
 
-        private void TampilkanData()
+        private void TampilkanData(string tampil)
         {
             dataGridView1.Rows.Clear();
 
@@ -32,12 +32,10 @@ namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
             {
                 conn.Open();
 
-                string query = "SELECT * FROM tb_bahan_baku WHERE kode_bahan = @kode_bahan";
+                string query = "SELECT * FROM tb_bahan_baku";
                  
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@kode_bahan", "");
-
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
