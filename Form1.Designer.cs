@@ -30,6 +30,13 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.kolomKodeBahan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kolomNamaBahan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kolomKategori = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kolomStok = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kolomSatuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kolomHargaSatuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kolomBatasMinimum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.txtBoxKodeBahan = new System.Windows.Forms.TextBox();
             this.txtBoxNamaBahan = new System.Windows.Forms.TextBox();
@@ -44,13 +51,6 @@
             this.txtBoxStok = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtBoxBatasMinimum = new System.Windows.Forms.TextBox();
-            this.kolomKodeBahan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kolomNamaBahan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kolomKategori = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kolomStok = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kolomSatuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kolomHargaSatuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kolomBatasMinimum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnTambah = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnHapus = new System.Windows.Forms.Button();
@@ -87,6 +87,48 @@
             this.dataGridView1.Size = new System.Drawing.Size(736, 393);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            // 
+            // kolomKodeBahan
+            // 
+            this.kolomKodeBahan.HeaderText = "KODE BAHAN";
+            this.kolomKodeBahan.Name = "kolomKodeBahan";
+            this.kolomKodeBahan.ReadOnly = true;
+            // 
+            // kolomNamaBahan
+            // 
+            this.kolomNamaBahan.HeaderText = "NAMA BAHAN";
+            this.kolomNamaBahan.Name = "kolomNamaBahan";
+            this.kolomNamaBahan.ReadOnly = true;
+            // 
+            // kolomKategori
+            // 
+            this.kolomKategori.HeaderText = "KATEGORI";
+            this.kolomKategori.Name = "kolomKategori";
+            this.kolomKategori.ReadOnly = true;
+            // 
+            // kolomStok
+            // 
+            this.kolomStok.HeaderText = "STOK";
+            this.kolomStok.Name = "kolomStok";
+            this.kolomStok.ReadOnly = true;
+            // 
+            // kolomSatuan
+            // 
+            this.kolomSatuan.HeaderText = "SATUAN";
+            this.kolomSatuan.Name = "kolomSatuan";
+            this.kolomSatuan.ReadOnly = true;
+            // 
+            // kolomHargaSatuan
+            // 
+            this.kolomHargaSatuan.HeaderText = "HARGA SATUAN";
+            this.kolomHargaSatuan.Name = "kolomHargaSatuan";
+            this.kolomHargaSatuan.ReadOnly = true;
+            // 
+            // kolomBatasMinimum
+            // 
+            this.kolomBatasMinimum.HeaderText = "BATAS MINIMUM";
+            this.kolomBatasMinimum.Name = "kolomBatasMinimum";
+            this.kolomBatasMinimum.ReadOnly = true;
             // 
             // label2
             // 
@@ -206,48 +248,6 @@
             this.txtBoxBatasMinimum.Size = new System.Drawing.Size(181, 20);
             this.txtBoxBatasMinimum.TabIndex = 16;
             // 
-            // kolomKodeBahan
-            // 
-            this.kolomKodeBahan.HeaderText = "KODE BAHAN";
-            this.kolomKodeBahan.Name = "kolomKodeBahan";
-            this.kolomKodeBahan.ReadOnly = true;
-            // 
-            // kolomNamaBahan
-            // 
-            this.kolomNamaBahan.HeaderText = "NAMA BAHAN";
-            this.kolomNamaBahan.Name = "kolomNamaBahan";
-            this.kolomNamaBahan.ReadOnly = true;
-            // 
-            // kolomKategori
-            // 
-            this.kolomKategori.HeaderText = "KATEGORI";
-            this.kolomKategori.Name = "kolomKategori";
-            this.kolomKategori.ReadOnly = true;
-            // 
-            // kolomStok
-            // 
-            this.kolomStok.HeaderText = "STOK";
-            this.kolomStok.Name = "kolomStok";
-            this.kolomStok.ReadOnly = true;
-            // 
-            // kolomSatuan
-            // 
-            this.kolomSatuan.HeaderText = "SATUAN";
-            this.kolomSatuan.Name = "kolomSatuan";
-            this.kolomSatuan.ReadOnly = true;
-            // 
-            // kolomHargaSatuan
-            // 
-            this.kolomHargaSatuan.HeaderText = "HARGA SATUAN";
-            this.kolomHargaSatuan.Name = "kolomHargaSatuan";
-            this.kolomHargaSatuan.ReadOnly = true;
-            // 
-            // kolomBatasMinimum
-            // 
-            this.kolomBatasMinimum.HeaderText = "BATAS MINIMUM";
-            this.kolomBatasMinimum.Name = "kolomBatasMinimum";
-            this.kolomBatasMinimum.ReadOnly = true;
-            // 
             // btnTambah
             // 
             this.btnTambah.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -274,6 +274,7 @@
             this.btnClear.TabIndex = 18;
             this.btnClear.Text = "CLEAR";
             this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnHapus
             // 
@@ -287,6 +288,7 @@
             this.btnHapus.TabIndex = 19;
             this.btnHapus.Text = "HAPUS";
             this.btnHapus.UseVisualStyleBackColor = false;
+            this.btnHapus.Click += new System.EventHandler(this.btnHapus_Click);
             // 
             // btnUpdate
             // 
@@ -300,6 +302,7 @@
             this.btnUpdate.TabIndex = 20;
             this.btnUpdate.Text = "UPDATE";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // Form1
             // 

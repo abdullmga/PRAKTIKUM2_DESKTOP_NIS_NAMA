@@ -9,12 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
 
 namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
 {
     public partial class Form1 : Form
     {
         string connectionString = "Server=localhost;Port=3306;Database=db_kopi_gudang;Uid=root;Password=;";
+        string selectedId = "";
         public Form1()
         {
             InitializeComponent();
@@ -34,20 +36,23 @@ namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
                 conn.Open();
 
                 string query = "SELECT * FROM tb_bahan_baku";
-                 
+
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
+                        
                         while (reader.Read())
                         {
+                            
+
                             dataGridView1.Rows.Add(
                                 reader["kode_bahan"].ToString(),
-                                reader["nama_bahan"].ToString(), 
-                                reader["kategori"].ToString(), 
-                                reader["stok"].ToString(), 
-                                reader["satuan"].ToString(), 
-                                reader["harga_satuan"].ToString(), 
+                                reader["nama_bahan"].ToString(),
+                                reader["kategori"].ToString(),
+                                reader["stok"].ToString(),
+                                reader["satuan"].ToString(),
+                                reader["harga_satuan"].ToString(),
                                 reader["batas_minimum"].ToString());
                         }
                     }
@@ -63,6 +68,7 @@ namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
             txtBoxSatuan.Clear();
             txtBoxHargaSatuan.Clear();
             txtBoxBatasMinimum.Clear();
+            txtBoxKodeBahan.Focus();
         }
         private void btnTambah_Click(object sender, EventArgs e)
         {
@@ -133,7 +139,8 @@ namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-            
+
+            selectedId = row.Cells[0].Value.ToString();
             txtBoxKodeBahan.Text = row.Cells[0].Value.ToString();
             txtBoxNamaBahan.Text = row.Cells[1].Value.ToString();
             cmbBoxKategori.Text = row.Cells[2].Value.ToString();
@@ -141,6 +148,103 @@ namespace PRAKTIKUM2_DESKTOP_NIS_NAMA
             txtBoxSatuan.Text = row.Cells[4].Value.ToString();
             txtBoxHargaSatuan.Text = row.Cells[5].Value.ToString();
             txtBoxBatasMinimum.Text = row.Cells[6].Value.ToString();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            string kode_bahan = txtBoxKodeBahan.Text;
+            string nama_bahan = txtBoxNamaBahan.Text;
+            string kategori = cmbBoxKategori.Text;
+            string stok = txtBoxStok.Text;
+            string satuan = txtBoxSatuan.Text;
+            string harga_satuan = txtBoxHargaSatuan.Text;
+            string batas_minimum = txtBoxBatasMinimum.Text;
+
+            if (selectedId == "")
+            {
+                MessageBox.Show("Pilih data yang ingin diubah terlebih dahulu !");
+            }
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string query = "UPDATE tb_bahan_baku SET kode_bahan = @kode_bahan, nama_bahan = @nama_bahan, kategori = @kategori, stok = @stok, satuan = @satuan, harga_satuan = @harga_satuan, batas_minimum = @batas_minimum WHERE kode_bahan = @kode_bahan_lama";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@kode_bahan_lama", selectedId);
+                        cmd.Parameters.AddWithValue("@kode_bahan", kode_bahan);
+                        cmd.Parameters.AddWithValue("@nama_bahan", nama_bahan);
+                        cmd.Parameters.AddWithValue("@kategori", kategori);
+                        cmd.Parameters.AddWithValue("@stok", stok);
+                        cmd.Parameters.AddWithValue("@satuan", satuan);
+                        cmd.Parameters.AddWithValue("@harga_satuan", harga_satuan);
+                        cmd.Parameters.AddWithValue("@batas_minimum", batas_minimum);
+
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Data bahan baku berhasil di Update disimpan !");
+
+                        TampilkanData("");
+
+                        BersihkanInput();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Terjadi kesalahan pada " + ex.Message);
+                return;
+            }
+        }
+
+        private void btnHapus_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string query = "DELETE FROM tb_bahan_baku WHERE kode_bahan = @kode_bahan_lama";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@kode_bahan_lama", selectedId);
+
+                        DialogResult pilihan = MessageBox.Show("Pilih data yang ingin dihapus terlebih dahulu !", "Hapus", MessageBoxButtons.YesNo);
+
+                        if (pilihan == DialogResult.Yes)
+                        { 
+                            MessageBox.Show("Data berhasil dihapus !");
+
+                            cmd.ExecuteNonQuery();
+
+                            TampilkanData("");
+
+                            BersihkanInput();
+                        }
+                        else if(pilihan == DialogResult.No){
+                            return;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Terjadi kesalahan pada " + ex.Message);
+                return;
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            BersihkanInput();
         }
     }
 }
