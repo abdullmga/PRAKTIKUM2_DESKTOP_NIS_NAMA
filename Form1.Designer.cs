@@ -51,6 +51,10 @@
             this.kolomSatuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kolomHargaSatuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kolomBatasMinimum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnTambah = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnHapus = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,16 +81,17 @@
             this.kolomSatuan,
             this.kolomHargaSatuan,
             this.kolomBatasMinimum});
-            this.dataGridView1.Location = new System.Drawing.Point(236, 56);
+            this.dataGridView1.Location = new System.Drawing.Point(236, 29);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(736, 393);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 29);
+            this.label2.Location = new System.Drawing.Point(9, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 13);
             this.label2.TabIndex = 2;
@@ -94,14 +99,14 @@
             // 
             // txtBoxKodeBahan
             // 
-            this.txtBoxKodeBahan.Location = new System.Drawing.Point(12, 45);
+            this.txtBoxKodeBahan.Location = new System.Drawing.Point(12, 29);
             this.txtBoxKodeBahan.Name = "txtBoxKodeBahan";
             this.txtBoxKodeBahan.Size = new System.Drawing.Size(181, 20);
             this.txtBoxKodeBahan.TabIndex = 3;
             // 
             // txtBoxNamaBahan
             // 
-            this.txtBoxNamaBahan.Location = new System.Drawing.Point(12, 98);
+            this.txtBoxNamaBahan.Location = new System.Drawing.Point(12, 82);
             this.txtBoxNamaBahan.Name = "txtBoxNamaBahan";
             this.txtBoxNamaBahan.Size = new System.Drawing.Size(181, 20);
             this.txtBoxNamaBahan.TabIndex = 5;
@@ -109,7 +114,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 82);
+            this.label3.Location = new System.Drawing.Point(9, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 13);
             this.label3.TabIndex = 4;
@@ -118,7 +123,12 @@
             // cmbBoxKategori
             // 
             this.cmbBoxKategori.FormattingEnabled = true;
-            this.cmbBoxKategori.Location = new System.Drawing.Point(12, 147);
+            this.cmbBoxKategori.Items.AddRange(new object[] {
+            "Biji Kopi",
+            "Susu & Dairy",
+            "Sirup & Pemanis",
+            "Kemasan"});
+            this.cmbBoxKategori.Location = new System.Drawing.Point(12, 131);
             this.cmbBoxKategori.Name = "cmbBoxKategori";
             this.cmbBoxKategori.Size = new System.Drawing.Size(181, 21);
             this.cmbBoxKategori.TabIndex = 6;
@@ -126,7 +136,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 131);
+            this.label4.Location = new System.Drawing.Point(9, 115);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 13);
             this.label4.TabIndex = 7;
@@ -134,7 +144,7 @@
             // 
             // txtBoxSatuan
             // 
-            this.txtBoxSatuan.Location = new System.Drawing.Point(12, 241);
+            this.txtBoxSatuan.Location = new System.Drawing.Point(12, 225);
             this.txtBoxSatuan.Name = "txtBoxSatuan";
             this.txtBoxSatuan.Size = new System.Drawing.Size(181, 20);
             this.txtBoxSatuan.TabIndex = 8;
@@ -142,7 +152,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 225);
+            this.label5.Location = new System.Drawing.Point(9, 209);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 13);
             this.label5.TabIndex = 9;
@@ -151,7 +161,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 277);
+            this.label6.Location = new System.Drawing.Point(9, 261);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(92, 13);
             this.label6.TabIndex = 11;
@@ -159,7 +169,7 @@
             // 
             // txtBoxHargaSatuan
             // 
-            this.txtBoxHargaSatuan.Location = new System.Drawing.Point(12, 293);
+            this.txtBoxHargaSatuan.Location = new System.Drawing.Point(12, 277);
             this.txtBoxHargaSatuan.Name = "txtBoxHargaSatuan";
             this.txtBoxHargaSatuan.Size = new System.Drawing.Size(181, 20);
             this.txtBoxHargaSatuan.TabIndex = 10;
@@ -167,7 +177,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 176);
+            this.label7.Location = new System.Drawing.Point(9, 160);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 13);
             this.label7.TabIndex = 13;
@@ -175,7 +185,7 @@
             // 
             // txtBoxStok
             // 
-            this.txtBoxStok.Location = new System.Drawing.Point(12, 192);
+            this.txtBoxStok.Location = new System.Drawing.Point(12, 176);
             this.txtBoxStok.Name = "txtBoxStok";
             this.txtBoxStok.Size = new System.Drawing.Size(181, 20);
             this.txtBoxStok.TabIndex = 12;
@@ -183,7 +193,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 325);
+            this.label8.Location = new System.Drawing.Point(9, 309);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(94, 13);
             this.label8.TabIndex = 15;
@@ -191,7 +201,7 @@
             // 
             // txtBoxBatasMinimum
             // 
-            this.txtBoxBatasMinimum.Location = new System.Drawing.Point(12, 341);
+            this.txtBoxBatasMinimum.Location = new System.Drawing.Point(12, 325);
             this.txtBoxBatasMinimum.Name = "txtBoxBatasMinimum";
             this.txtBoxBatasMinimum.Size = new System.Drawing.Size(181, 20);
             this.txtBoxBatasMinimum.TabIndex = 16;
@@ -238,11 +248,68 @@
             this.kolomBatasMinimum.Name = "kolomBatasMinimum";
             this.kolomBatasMinimum.ReadOnly = true;
             // 
+            // btnTambah
+            // 
+            this.btnTambah.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnTambah.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTambah.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTambah.ForeColor = System.Drawing.Color.White;
+            this.btnTambah.Location = new System.Drawing.Point(12, 362);
+            this.btnTambah.Name = "btnTambah";
+            this.btnTambah.Size = new System.Drawing.Size(89, 34);
+            this.btnTambah.TabIndex = 17;
+            this.btnTambah.Text = "TAMBAH";
+            this.btnTambah.UseVisualStyleBackColor = false;
+            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.ForeColor = System.Drawing.Color.White;
+            this.btnClear.Location = new System.Drawing.Point(333, 437);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(91, 34);
+            this.btnClear.TabIndex = 18;
+            this.btnClear.Text = "CLEAR";
+            this.btnClear.UseVisualStyleBackColor = false;
+            // 
+            // btnHapus
+            // 
+            this.btnHapus.BackColor = System.Drawing.Color.Red;
+            this.btnHapus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHapus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHapus.ForeColor = System.Drawing.Color.White;
+            this.btnHapus.Location = new System.Drawing.Point(236, 437);
+            this.btnHapus.Name = "btnHapus";
+            this.btnHapus.Size = new System.Drawing.Size(91, 34);
+            this.btnHapus.TabIndex = 19;
+            this.btnHapus.Text = "HAPUS";
+            this.btnHapus.UseVisualStyleBackColor = false;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.Color.Blue;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.ForeColor = System.Drawing.Color.White;
+            this.btnUpdate.Location = new System.Drawing.Point(104, 362);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(89, 34);
+            this.btnUpdate.TabIndex = 20;
+            this.btnUpdate.Text = "UPDATE";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 461);
+            this.ClientSize = new System.Drawing.Size(984, 525);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.btnHapus);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnTambah);
             this.Controls.Add(this.txtBoxBatasMinimum);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -293,6 +360,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn kolomSatuan;
         private System.Windows.Forms.DataGridViewTextBoxColumn kolomHargaSatuan;
         private System.Windows.Forms.DataGridViewTextBoxColumn kolomBatasMinimum;
+        private System.Windows.Forms.Button btnTambah;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnHapus;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }
 
